@@ -7,10 +7,13 @@ const apiKey = 'eManTqoqrDFCzp1CIXSS8CCIU3VcbVVS';
 
 
 async function getGipApi(){
-    const res = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${search.value}&limit=25&offset=0&rating=g&lang=en`)
+    const res = await axios.get('https://api.giphy.com/v1/gifs/search?', {params: {
+        q: search.value,
+        api_key: apiKey
+    }})
     const newImg = document.createElement('img');
 
-    newImg.src = `${res}`;
+    newImg.src = `${res.data.data[Math.floor(Math.random() * 50)].images.original.url}`;
     newImgDiv.append(newImg);
     console.log(res);
 }
